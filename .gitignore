@@ -1,0 +1,7 @@
+architectds/
+example_assets/
+.ninja_deps
+.ninja_log
+main.cpp
+build/
+build.ninja
