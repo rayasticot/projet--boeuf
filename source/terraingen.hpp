@@ -1,19 +1,30 @@
-#ifndef TERRAINGGEN_HPP
-#define TERRAINGGEN_HPP
+#ifndef TERRAINGEN_HPP
+#define TERRAINGEN_HPP
 
 class TerrainGen{
-    private:
-        static constexpr int materialAmmount = 1;
-        static constexpr int spritesAmmount = 9;
-        static constexpr int tileSize = 256;
-        std::array<NE_Material*, materialAmmount> materials;
-        std::array<NE_Sprite*, spritesAmmount> sprites;
+    /*
+        Le mot texture est utilisé pour désigner une image.
+        Le mot sprite ici, désigne un "objet image" présent dans le monde.
+    */
+    bool textureLoaded = false;
+    bool paletteLoaded = false;
+    bool spriteCreated = false;
 
-        void moveSprite(NE_Sprite* sprite, Vector2i position, int i);
-        void setSpriteMaterial(NE_Sprite* sprite, Vector2i position);
+    void load_textures_and_palettes(std::string filename);
+    void create_sprites();
+    void delete_sprites();
+    void unload_textures_and_palettes();
+
+    int get_tile_from_pos(Vector2i pos);
+
     public:
+        static constexpr int TEXTURE_AMMOUNT = 2;
+        static constexpr int PALETTE_AMMOUNT = 1;
+        static constexpr int TEXTURE_SIZE = 128;
+        static constexpr int SPRITE_AMMOUNT = 16; // 4x3
+
+        void update(Vector2i playerPos);
         TerrainGen(std::string filename);
-        void update(Vector2i position);
         ~TerrainGen();
 };
 
